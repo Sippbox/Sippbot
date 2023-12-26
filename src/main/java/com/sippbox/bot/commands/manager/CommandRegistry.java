@@ -34,6 +34,7 @@ public class CommandRegistry {
                     create(new TutorialCommand()),
                     create(new DocumentationCommand()),
                     create(new BlenderExportCommand()),
+                    create(new RigCommand()),
                     create(new PingCommand())
             ).queue();
         }, () -> System.out.println("JDA is not present!"));

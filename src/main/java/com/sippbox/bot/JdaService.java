@@ -1,6 +1,7 @@
 package com.sippbox.bot;
 
 import com.sippbox.bot.commands.manager.SlashCommandHandler;
+import com.sippbox.bot.listeners.MessageListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Guild;
@@ -22,7 +23,9 @@ public class JdaService {
     public JdaService(String token) {
         this.token = token;
 
-        start(Collections.emptyList());
+        gatewayIntents.add(GatewayIntent.MESSAGE_CONTENT);
+
+        start(gatewayIntents);
     }
 
 
@@ -34,7 +37,7 @@ public class JdaService {
         try {
             jda = JDABuilder.createDefault(token)
                     .enableIntents(gatewayIntents)
-                    .addEventListeners(new SlashCommandHandler(), new ReadyListener())
+                    .addEventListeners(new SlashCommandHandler(), new ReadyListener(), new MessageListener())
                     .build();
 
             jda.awaitReady();
