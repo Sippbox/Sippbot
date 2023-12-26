@@ -5,7 +5,7 @@ This project is forked from [Nyjava](https://github.com/Nyvil/Nyjava) and is cur
 
 # Author(s)
 * **[Alexandros(@Nyvil)](https://github.com/Nyvil)** - initial work
-* **[Sipp(@Sippbox)](https://github.com/Nyvil)** - Owner of SAB and this bot
+* **[Sipp(@Sippbox)](https://github.com/Sippbox)** - Owner of SAB and this bot
 
 # License
 This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/Nyvil/Nyjava/blob/stable/LICENSE) file for details.
