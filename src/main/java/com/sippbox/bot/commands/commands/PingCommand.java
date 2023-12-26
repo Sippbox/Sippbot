@@ -1,4 +1,4 @@
-package com.sippbox.bot.commands.commands.deprecated;
+package com.sippbox.bot.commands.commands;
 
 import com.sippbox.bot.commands.manager.SlashCommand;
 import net.dv8tion.jda.api.Permission;

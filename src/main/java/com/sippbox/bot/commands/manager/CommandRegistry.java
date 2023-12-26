@@ -7,7 +7,7 @@ package com.sippbox.bot.commands.manager;
 
 import com.sippbox.Sippbot;
 import com.sippbox.bot.commands.commands.*;
-import com.sippbox.bot.commands.commands.deprecated.PingCommand;
+import com.sippbox.bot.commands.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;

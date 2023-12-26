@@ -8,4 +8,4 @@ This project is forked from [Nyjava](https://github.com/Nyvil/Nyjava) and is cur
 * **[Sipp(@Sippbox)](https://github.com/Sippbox)** - Owner of SAB and this bot
 
 # License
-This project is licensed under the Apache 2.0 License - see the [LICENSE](https://github.com/Nyvil/Nyjava/blob/stable/LICENSE) file for details.
+This project is licensed under the Apache 2.0 License, same as the template project.
