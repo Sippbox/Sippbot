@@ -4,6 +4,8 @@ import com.sippbox.Sippbot;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
 import com.sippbox.utils.MessageUtils;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
+import net.dv8tion.jda.api.entities.channel.concrete.ThreadChannel;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
 
@@ -30,9 +32,14 @@ public class SlashCommandHandler extends ListenerAdapter {
             }
         }
 
-
-        SlashCommandRecord record = new SlashCommandRecord(command.get(), e, e.getMember(), e.getChannel().asTextChannel(), e.getOptions());
-        command.get().execute(record);
+        // Handle TextChannel and ThreadChannel separately
+        if (e.getChannel() instanceof TextChannel textChannel) {
+            SlashCommandRecord record = new SlashCommandRecord(command.get(), e, e.getMember(), textChannel, e.getOptions());
+            command.get().execute(record);
+        } else if (e.getChannel() instanceof ThreadChannel threadChannel) {
+            SlashCommandRecord record = new SlashCommandRecord(command.get(), e, e.getMember(), threadChannel, e.getOptions());
+            command.get().execute(record);
+        }
     }
 
 
