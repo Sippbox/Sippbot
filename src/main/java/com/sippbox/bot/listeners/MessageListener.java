@@ -13,6 +13,12 @@ public class MessageListener extends ListenerAdapter {
             new URLBlacklistEvent(event);
             new BotPatEvent(event);
             new BoogieBombEvent(event);
+
+            // If the message content equals "java sucks", reply with "no u"
+
+            if (event.getMessage().getContentRaw().equalsIgnoreCase("java sucks")) {
+                event.getChannel().sendMessage("Fuck off").queue();
+            }
         }
     }
 }

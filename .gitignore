@@ -212,6 +212,7 @@ pom.xml.next
 release.properties
 dependency-reduced-pom.xml
 token.txt
+bot_tokens_do_not_add_to_git
 buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar

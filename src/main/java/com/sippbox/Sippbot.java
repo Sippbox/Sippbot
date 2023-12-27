@@ -21,7 +21,6 @@ public class Sippbot {
         if(args.length < 1) {
             //Check if token.txt exists
             //If it does, read the token from it
-
             if (new File("token.txt").exists()) {
                 try {
                     File file = new java.io.File("token.txt");

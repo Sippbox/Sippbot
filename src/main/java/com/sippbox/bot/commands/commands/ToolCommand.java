@@ -2,6 +2,7 @@ package com.sippbox.bot.commands.commands;
 
 import com.sippbox.bot.commands.manager.SlashCommand;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
@@ -18,7 +19,12 @@ public class ToolCommand extends SlashCommand {
             put("RATS", "https://github.com/rrazgriz/RATS");
             put("VRCFury", "https://vrcfury.com/");
             put("Gesture Manager", "https://github.com/BlackStartx/VRC-Gesture-Manager");
+            put("Av3Emulator", "https://github.com/lyuma/Av3Emulator");
+            put("Avatars 3.0 Manager", "https://github.com/VRLabs/Avatars-3.0-Manager");
             put("Combo Gesture Expressions", "https://github.com/hai-vr/combo-gesture-expressions-av3");
+            put("VRCQuestTools", "https://github.com/kurotu/VRCQuestTools");
+            put("Animator as Code", "https://github.com/hai-vr/av3-animator-as-code");
+            put("Toggle Assistant", "https://shatteredfur.gumroad.com/l/vrctoggle");
         }
     };
 
@@ -26,6 +32,8 @@ public class ToolCommand extends SlashCommand {
         {
             put("D4rk's Avatar Optimizer", "https://github.com/d4rkc0d3r/d4rkAvatarOptimizer");
             put("Avatar Performance Tools", "https://github.com/Thryrallo/VRC-Avatar-Performance-Tools");
+            put("Unity Mesh Transfer Utility", "https://github.com/CascadianVR/Unity-Mesh-Transfer-Utility");
+
         }
     };
 
@@ -35,6 +43,7 @@ public class ToolCommand extends SlashCommand {
             put("VRCLens", "https://hirabiki.gumroad.com/l/rpnel");
             put("Gogo Loco", "https://github.com/Franada/gogoloco");
             put("Poiyomi Toon Shader", "https://github.com/poiyomi/PoiyomiToonShader");
+            put("lilToon", "https://github.com/lilxyzw/lilToon");
         }
     };
 
@@ -96,6 +105,26 @@ public class ToolCommand extends SlashCommand {
         }
 
         System.out.println("--------------------");
+
+        if (tool.equals("all") || tool.equals("listall")) {
+            //Display all tools categorized by type in an embed
+            EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("All Tools");
+
+            StringBuilder productivityToolsBuilder = new StringBuilder();
+            productivityTools.forEach((key, value) -> productivityToolsBuilder.append(key).append(" - ").append(value).append("\n"));
+            embedBuilder.addField("Productivity", productivityToolsBuilder.toString(), false);
+
+            StringBuilder optimizationToolsBuilder = new StringBuilder();
+            optimizationTools.forEach((key, value) -> optimizationToolsBuilder.append(key).append(" - ").append(value).append("\n"));
+            embedBuilder.addField("Optimization", optimizationToolsBuilder.toString(), false);
+
+            StringBuilder featureToolsBuilder = new StringBuilder();
+            featureTools.forEach((key, value) -> featureToolsBuilder.append(key).append(" - ").append(value).append("\n"));
+            embedBuilder.addField("Features", featureToolsBuilder.toString(), false);
+
+            info.event().replyEmbeds(embedBuilder.build()).queue();
+            return;
+        }
 
         if (highestScore >= 0.7) {
             info.event().reply(bestMatch).queue();
