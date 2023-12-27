@@ -21,8 +21,13 @@ public class BotPatEvent {
 
     private String getPatReaction(MessageReceivedEvent event) {
         String[] patReactions = {
-
-                "https://github.com/Sippbox/Sippbot/blob/main/src/main/resources/bean.png"
+                "Thank you, " + event.getMember().getAsMention() + "!",
+                ":relaxed:",
+                ":flushed:",
+                "YIPE! :laughing:",
+                "thank u budy",
+                "thanks for it!",
+                "https://cdn.discordapp.com/attachments/1015719155804160094/1189070884330287148/bean.png"
         };
         return patReactions[r.nextInt(patReactions.length)];
     }

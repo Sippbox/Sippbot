@@ -79,12 +79,11 @@ public class ScamBanCommand extends SlashCommand {
         info.event().getGuild().retrieveMemberById(userId).queue(member -> {
             MessageEmbed embed = MessageUtils.createBanScammerConfirmationEmbed(member);
             Button banButton = Button.danger("ban_user", "Ban user").withEmoji(Emoji.fromUnicode("⚠"));
-            Button confirmedBanButton = Button.success("ban_success", "Banned").asDisabled().withEmoji(Emoji.fromUnicode("✅"));
             info.event().replyEmbeds(embed).addActionRow(banButton).queue();
 
             info.event().getJDA().addEventListener(new ConfirmScamBanListener(member));
 
 
-        }, failure -> info.event().reply("Failed to find user!").setEphemeral(true).queue());
+        }, failure -> info.event().reply("Failed to find user. Are you sure they're in the server?").setEphemeral(true).queue());
     }
 }
