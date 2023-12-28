@@ -1,5 +1,7 @@
 package com.sippbox.bot.commands.commands;
 
+import com.sippbox.beans.Category;
+import com.sippbox.beans.Tool;
 import com.sippbox.bot.commands.manager.SlashCommand;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
 import net.dv8tion.jda.api.EmbedBuilder;
@@ -8,66 +10,103 @@ import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 import org.apache.commons.lang3.StringUtils;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * This class represents a command that provides links to useful tools for VRChat Avatars.
+ * It extends the SlashCommand class and overrides its methods to implement the functionality of the command.
+ */
 public class ToolCommand extends SlashCommand {
-    public static Map<String, String> productivityTools = new HashMap<>(){
+    /**
+     * A list of tools that the command can provide links to.
+     */
+    public static List<Tool> tools = new ArrayList<>(){
         {
-            put("Pumkin's Avatar Tools", "https://github.com/rurre/PumkinsAvatarTools");
-            put("Editor Screenshot", "https://github.com/rurre/Editor-Screenshot");
-            put("RATS", "https://github.com/rrazgriz/RATS");
-            put("VRCFury", "https://vrcfury.com/");
-            put("Gesture Manager", "https://github.com/BlackStartx/VRC-Gesture-Manager");
-            put("Av3Emulator", "https://github.com/lyuma/Av3Emulator");
-            put("Avatars 3.0 Manager", "https://github.com/VRLabs/Avatars-3.0-Manager");
-            put("Combo Gesture Expressions", "https://github.com/hai-vr/combo-gesture-expressions-av3");
-            put("VRCQuestTools", "https://github.com/kurotu/VRCQuestTools");
-            put("Animator as Code", "https://github.com/hai-vr/av3-animator-as-code");
-            put("Toggle Assistant", "https://shatteredfur.gumroad.com/l/vrctoggle");
+            add(new Tool("Pumkin's Avatar Tools", "An editor script that adds tools to help you setup avatars faster and easier.",
+                    "https://github.com/rurre/PumkinsAvatarTools", Category.PRODUCTIVITY));
+            add(new Tool("Editor Screenshot", "A unity editor script for taking screenshots in the editor",
+                    "https://github.com/rurre/Editor-Screenshot", Category.PRODUCTIVITY));
+            add(new Tool("RATS", "Modifies the Unity animator to fix bugs, add customization options, and streamline the animator workflow",
+                    "https://github.com/rrazgriz/RATS", Category.PRODUCTIVITY));
+            add(new Tool("VRCFury", "Non-Destructive Tools for VRChat Avatars",
+                    "https://vrcfury.com/", Category.PRODUCTIVITY));
+            add(new Tool("Gesture Manager", "Allows previewing and editing of avatar expressions directly in Unity.",
+                    "https://github.com/BlackStartx/VRC-Gesture-Manager", Category.PRODUCTIVITY));
+            add(new Tool("Av3Emulator", "An emulator for Avatars 3.0",
+                    "https://github.com/lyuma/Av3Emulator", Category.PRODUCTIVITY));
+            add(new Tool("Avatars 3.0 Manager", "Avatars 3.0 Manager",
+                    "A tool for managing playable layers and parameters for Avatars 3.0.", Category.PRODUCTIVITY));
+            add(new Tool("Combo Gesture Expressions", "Unity Editor tool that lets you attach face expressions to hand gestures, and make it react to other Avatars 3.0's features, including Contacts, PhysBones and OSC.",
+                    "https://github.com/hai-vr/combo-gesture-expressions-av3", Category.PRODUCTIVITY));
+            add(new Tool("VRCQuestTools", "VRCQuestTools",
+                    "Avatar Converter and Utilities for Quest", Category.PRODUCTIVITY));
+            add(new Tool("Animator as Code", "Animator as Code",
+                    "Write code to create animations in bulk.", Category.PRODUCTIVITY));
+            add(new Tool("Toggle Assistant", "Make toggles extremely quickly by just selecting a game object",
+                    "https://shatteredfur.gumroad.com/l/vrctoggle", Category.PRODUCTIVITY));
+            add(new Tool("Modular Avatar", "A suite of non-destructive tools for modularizing your avatars and distributing avatar components.",
+                    "https://github.com/bdunderscore/modular-avatar", Category.PRODUCTIVITY));
+            add(new Tool("D4rk's Avatar Optimizer", "Combines skinned mesh renders and materials in unity.",
+                    "https://github.com/d4rkc0d3r/d4rkAvatarOptimizer", Category.OPTIMIZATION));
+            add(new Tool("Avatar Performance Tools", "Used to check VRAM and other stats before uploading an avatar.",
+                    "https://github.com/Thryrallo/VRC-Avatar-Performance-Tools", Category.OPTIMIZATION));
+            add(new Tool("Unity Mesh Transfer Utility", "A tool that lets you join meshes in unity so you don't have to use blender.",
+                    "https://github.com/CascadianVR/Unity-Mesh-Transfer-Utility", Category.OPTIMIZATION));
+            add(new Tool("AudioLink", "Make avatars react to music in worlds that support it.",
+                    "https://github.com/llealloo/vrc-udon-audio-link", Category.FEATURES));
+            add(new Tool("VRCLens", "A set of photographic extensions to the stock VRChat camera to be added on an avatar",
+                    "https://hirabiki.gumroad.com/l/rpnel", Category.FEATURES));
+            add(new Tool("Gogo Loco", "A locomotion prefab that improves the default controller with extra features.",
+                    "https://github.com/Franada/gogoloco", Category.FEATURES));
+            add(new Tool("Poiyomi Toon Shader", "Feature-rich shaders intended for use with VRChat, supports multiple shading modes and robust light handling.",
+                    "https://github.com/poiyomi/PoiyomiToonShader", Category.SHADERS));
+            add(new Tool("lilToon", "Feature-rich shaders commonly used for Booth models.",
+                    "https://github.com/lilxyzw/lilToon", Category.SHADERS));
         }
     };
 
-    public static Map<String, String> optimizationTools = new HashMap<>(){
-        {
-            put("D4rk's Avatar Optimizer", "https://github.com/d4rkc0d3r/d4rkAvatarOptimizer");
-            put("Avatar Performance Tools", "https://github.com/Thryrallo/VRC-Avatar-Performance-Tools");
-            put("Unity Mesh Transfer Utility", "https://github.com/CascadianVR/Unity-Mesh-Transfer-Utility");
-
-        }
-    };
-
-    public static Map<String, String> featureTools = new HashMap<>() {
-        {
-            put("AudioLink", "https://github.com/llealloo/vrc-udon-audio-link");
-            put("VRCLens", "https://hirabiki.gumroad.com/l/rpnel");
-            put("Gogo Loco", "https://github.com/Franada/gogoloco");
-            put("Poiyomi Toon Shader", "https://github.com/poiyomi/PoiyomiToonShader");
-            put("lilToon", "https://github.com/lilxyzw/lilToon");
-        }
-    };
-
-
+    /**
+     * Returns the name of the command.
+     * @return the name of the command.
+     */
     @Override
     public String name() {
         return "tools";
     }
 
+    /**
+     * Returns the description of the command.
+     * @return the description of the command.
+     */
     @Override
     public String description() {
         return "Links to useful tools for VRChat Avatars.";
     }
 
+    /**
+     * Returns the permissions needed to use the command.
+     * @return an array of permissions needed to use the command.
+     */
     @Override
     public Permission[] neededPermissions() {
         return new Permission[]{Permission.USE_APPLICATION_COMMANDS};
     }
 
+    /**
+     * Returns whether the command can only be used in a guild.
+     * @return true if the command can only be used in a guild, false otherwise.
+     */
     @Override
     public boolean guildOnly() {
         return true;
     }
 
+    /**
+     * Returns the options for the command.
+     * @return an array of options for the command.
+     */
     @Override
     public OptionData[] options() {
         return new OptionData[]{
@@ -75,63 +114,39 @@ public class ToolCommand extends SlashCommand {
         };
     }
 
+    /**
+     * Executes the command.
+     * @param info the record of the command execution.
+     */
     @Override
     public void execute(SlashCommandRecord info) {
-        String tool = info.event().getOption("tool").getAsString();
-        //remove whitespace
-        tool = tool.replaceAll("\\s+","");
-        //remove apostrophes
-        tool = tool.replaceAll("'", "");
-        //convert to lowercase
-        tool = tool.toLowerCase();
+        // Get the name of the tool from the command options and normalize it
+        String toolName = info.event().getOption("tool").getAsString().replaceAll("\\s+","").replaceAll("'", "").toLowerCase();
 
-        Map<String, String> allTools = new HashMap<>();
-        allTools.putAll(productivityTools);
-        allTools.putAll(optimizationTools);
-        allTools.putAll(featureTools);
+        // Find the tool that best matches the provided name
+        Tool bestMatch = tools.stream()
+                .max((tool1, tool2) -> Double.compare(StringUtils.getJaroWinklerDistance(toolName, tool1.getName().toLowerCase()), StringUtils.getJaroWinklerDistance(toolName, tool2.getName().toLowerCase())))
+                .orElse(null);
 
-        String bestMatch = "";
-        double highestScore = 0;
-
-        System.out.println("--------------------");
-
-        for (Map.Entry<String, String> entry : allTools.entrySet()) {
-            double score = StringUtils.getJaroWinklerDistance(tool, entry.getKey().toLowerCase());
-            System.out.println(entry.getKey() + " " + score);
-            if (score > highestScore) {
-                highestScore = score;
-                bestMatch = entry.getValue();
-            }
-        }
-
-        System.out.println("--------------------");
-
-        if (tool.equals("all") || tool.equals("listall")) {
-            //Display all tools categorized by type in an embed
+        // If the provided name is "all" or "listall", reply with a list of all tools
+        if (toolName.equals("all") || toolName.equals("listall")) {
             EmbedBuilder embedBuilder = new EmbedBuilder().setTitle("All Tools");
-
-            StringBuilder productivityToolsBuilder = new StringBuilder();
-            productivityTools.forEach((key, value) -> productivityToolsBuilder.append(key).append(" - ").append(value).append("\n"));
-            embedBuilder.addField("Productivity", productivityToolsBuilder.toString(), false);
-
-            StringBuilder optimizationToolsBuilder = new StringBuilder();
-            optimizationTools.forEach((key, value) -> optimizationToolsBuilder.append(key).append(" - ").append(value).append("\n"));
-            embedBuilder.addField("Optimization", optimizationToolsBuilder.toString(), false);
-
-            StringBuilder featureToolsBuilder = new StringBuilder();
-            featureTools.forEach((key, value) -> featureToolsBuilder.append(key).append(" - ").append(value).append("\n"));
-            embedBuilder.addField("Features", featureToolsBuilder.toString(), false);
-
+            tools.stream()
+                    .collect(Collectors.groupingBy(Tool::getCategory))
+                    .forEach((category, tools) -> {
+                        String toolsList = tools.stream().map(tool -> tool.getName() + " - " + tool.getLink()).collect(Collectors.joining("\n"));
+                        embedBuilder.addField(category.toString(), toolsList, false);
+                    });
             info.event().replyEmbeds(embedBuilder.build()).queue();
             return;
         }
 
-        if (highestScore >= 0.7) {
-            info.event().reply(bestMatch).queue();
-            System.out.println("Best match: " + bestMatch);
+        // If a tool was found that matches the provided name, reply with the link to the tool
+        if (bestMatch != null && StringUtils.getJaroWinklerDistance(toolName, bestMatch.getName().toLowerCase()) >= 0.7) {
+            info.event().reply("**[" + bestMatch.getName() + "]" + "(" + bestMatch.getLink() + ")" + " - " + bestMatch.getDescription() + "**").queue();
         } else {
+            // If no tool was found, reply with a message indicating that no tool was found
             info.event().reply("No tool found with that name!").queue();
-            System.out.println("No match found!");
         }
     }
 }

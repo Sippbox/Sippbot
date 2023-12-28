@@ -16,7 +16,7 @@ public class URLBlacklistEvent {
     // Array of blacklisted URLs
     private static final String[] BLACKLISTED_URLS = {"vrcmods.com", "ripper.store", "vrmodels.store"};
     // ID of the avatar helper chat
-    private static final String AVATAR_HELPER_CHAT_ID = "1103761497185853525";
+    private static final String AVATAR_HELPER_CHAT_ID = "973278945980088330";
     // TextChannel object representing the avatar helper chat
     private final TextChannel avatarHelperChat;
 
