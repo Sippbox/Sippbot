@@ -211,8 +211,6 @@ pom.xml.versionsBackup
 pom.xml.next
 release.properties
 dependency-reduced-pom.xml
-token.txt
-bot_tokens_do_not_add_to_git
 buildNumber.properties
 .mvn/timing.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
@@ -249,5 +247,9 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+# Bot specific
+token.txt
+bot_tokens_do_not_add_to_git
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,maven,windows,linux,macos,git

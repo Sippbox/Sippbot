@@ -180,6 +180,11 @@ public final class MessageUtils {
         return embedBuilder;
     }
 
+    /**
+     * Creates an embed for the ban scammer command
+     *
+     * @return Embed
+     */
     public static MessageEmbed createBanScammerConfirmationEmbed(Member member){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(Color.RED);

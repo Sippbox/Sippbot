@@ -1,7 +1,6 @@
 package com.sippbox.bot.commands.manager;
 
 import com.sippbox.Sippbot;
-import com.sippbox.bot.RoleRegistry;
 import com.sippbox.bot.commands.commands.*;
 import com.sippbox.bot.commands.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;
@@ -12,8 +11,6 @@ import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import static com.sippbox.bot.RoleRegistry.*;
 
 public class CommandRegistry {
 
