@@ -2,6 +2,7 @@ package com.sippbox;
 
 import com.sippbox.bot.JdaService;
 import com.sippbox.bot.commands.manager.CommandRegistry;
+import com.sippbox.enums.Channels;
 
 import java.io.*;
 import java.nio.file.Files;

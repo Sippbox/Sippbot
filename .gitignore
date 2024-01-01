@@ -251,5 +251,6 @@ $RECYCLE.BIN/
 # Bot specific
 token.txt
 bot_tokens_do_not_add_to_git
+channel_ids.json
 
 # End of https://www.toptal.com/developers/gitignore/api/java,intellij,maven,windows,linux,macos,git

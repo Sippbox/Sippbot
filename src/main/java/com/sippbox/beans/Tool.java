@@ -1,16 +1,18 @@
 package com.sippbox.beans;
 
+import com.sippbox.enums.ToolCategory;
+
 public class Tool {
     private String name;
     private String description;
     private String link;
-    private Category category;
+    private ToolCategory toolCategory;
 
-    public Tool(String name, String description, String link, Category category) {
+    public Tool(String name, String description, String link, ToolCategory toolCategory) {
         this.name = name;
         this.description = description;
         this.link = link;
-        this.category = category;
+        this.toolCategory = toolCategory;
     }
 
     public String getName() {
@@ -37,7 +39,7 @@ public class Tool {
         this.link = link;
     }
 
-    public Category getCategory() { return category; }
+    public ToolCategory getCategory() { return toolCategory; }
 
-    public void setCategory(Category category) { this.category = category; }
+    public void setCategory(ToolCategory toolCategory) { this.toolCategory = toolCategory; }
 }

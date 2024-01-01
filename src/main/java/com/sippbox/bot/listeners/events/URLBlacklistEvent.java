@@ -1,5 +1,7 @@
 package com.sippbox.bot.listeners.events;
 
+import com.sippbox.ChannelRegistry;
+import com.sippbox.enums.Channels;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -16,7 +18,6 @@ public class URLBlacklistEvent {
     // Array of blacklisted URLs
     private static final String[] BLACKLISTED_URLS = {"vrcmods.com", "ripper.store", "vrmodels.store"};
     // ID of the avatar helper chat
-    private static final String AVATAR_HELPER_CHAT_ID = "973278945980088330";
     // TextChannel object representing the avatar helper chat
     private final TextChannel avatarHelperChat;
 
@@ -25,7 +26,7 @@ public class URLBlacklistEvent {
      * @param event The MessageReceivedEvent that triggered this event.
      */
     public URLBlacklistEvent(MessageReceivedEvent event) {
-        avatarHelperChat = event.getGuild().getTextChannelById(AVATAR_HELPER_CHAT_ID);
+        avatarHelperChat = ChannelRegistry.getTextChannel(event.getGuild(), Channels.AVATAR_HELPER_CHAT);
         String messageContent = event.getMessage().getContentRaw();
 
         // Check if the message contains any blacklisted URLs

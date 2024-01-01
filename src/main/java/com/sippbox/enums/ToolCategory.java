@@ -1,6 +1,6 @@
-package com.sippbox.beans;
+package com.sippbox.enums;
 
-public enum Category {
+public enum ToolCategory {
     OPTIMIZATION,
     PRODUCTIVITY,
     FEATURES,
