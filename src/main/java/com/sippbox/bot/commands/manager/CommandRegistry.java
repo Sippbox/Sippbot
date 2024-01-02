@@ -1,6 +1,6 @@
 package com.sippbox.bot.commands.manager;
 
-import com.sippbox.Sippbot;
+import com.sippbox.bot.Sippbot;
 import com.sippbox.bot.commands.commands.*;
 import com.sippbox.bot.commands.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;

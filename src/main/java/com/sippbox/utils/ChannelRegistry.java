@@ -1,4 +1,4 @@
-package com.sippbox;
+package com.sippbox.utils;
 
 import com.google.gson.Gson;
 import com.sippbox.enums.Channels;

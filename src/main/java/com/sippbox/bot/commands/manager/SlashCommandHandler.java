@@ -1,6 +1,6 @@
 package com.sippbox.bot.commands.manager;
 
-import com.sippbox.Sippbot;
+import com.sippbox.bot.Sippbot;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
 import com.sippbox.utils.MessageUtils;
 import net.dv8tion.jda.api.Permission;

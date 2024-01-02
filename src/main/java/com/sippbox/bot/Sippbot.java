@@ -1,6 +1,5 @@
-package com.sippbox;
+package com.sippbox.bot;
 
-import com.sippbox.bot.JdaService;
 import com.sippbox.bot.commands.manager.CommandRegistry;
 
 import java.io.*;

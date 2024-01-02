@@ -39,10 +39,11 @@ public class ConfirmScamBanListener extends ListenerAdapter {
                 if (event.getMember() == null) return;
 
                 sendBanMessage().thenAccept(messageSent -> {
-                    banUser(event);
                     if (messageSent) {
+                        banUser(event);
                         interactionHook.editOriginal("User banned.").queue();
                     } else {
+                        banUser(event);
                         interactionHook.editOriginal("User banned, but failed to send ban message. They may not have DMs enabled.").queue();
                     }
                 });

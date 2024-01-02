@@ -6,7 +6,7 @@ package com.sippbox.utils;
  */
 
 
-import com.sippbox.Sippbot;
+import com.sippbox.bot.Sippbot;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;

@@ -1,6 +1,6 @@
 package com.sippbox.bot.listeners.events;
 
-import com.sippbox.ChannelRegistry;
+import com.sippbox.utils.ChannelRegistry;
 import com.sippbox.enums.Channels;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
