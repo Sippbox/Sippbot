@@ -37,15 +37,9 @@ public class ConfirmScamBanListener extends ListenerAdapter {
         if (event.getComponentId().equals("ban_user") && !event.isAcknowledged()) {
             event.deferReply().setEphemeral(true).queue(interactionHook -> {
                 if (event.getMember() == null) return;
-
+                banUser(event);
                 sendBanMessage().thenAccept(messageSent -> {
-                    if (messageSent) {
-                        banUser(event);
-                        interactionHook.editOriginal("User banned.").queue();
-                    } else {
-                        banUser(event);
-                        interactionHook.editOriginal("User banned, but failed to send ban message. They may not have DMs enabled.").queue();
-                    }
+                    interactionHook.editOriginal("User banned" + (messageSent ? "." : ", but failed to send ban message. They may not have DMs enabled.")).queue();
                 });
             });
         }
@@ -82,11 +76,12 @@ public class ConfirmScamBanListener extends ListenerAdapter {
      * @param event The event of a button interaction.
      */
     private void banUser(ButtonInteractionEvent event) {
-        event.getGuild().ban(MEMBER, 7, TimeUnit.DAYS).queue(success -> {
+        event.getGuild().ban(MEMBER, 7, TimeUnit.DAYS).reason("[Sippbot] Scamming").queue(success -> {
             Button confirmedBanButton = Button.success("ban_success", "Banned").asDisabled();
             event.getMessage().editMessageComponents(ActionRow.of(confirmedBanButton)).queue();
         }, failure -> {
             event.reply("Failed to ban user. Are you sure they are in the server?").queue();
         });
     }
+
 }
