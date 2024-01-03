@@ -1,7 +1,7 @@
 package com.sippbox.utils;
 
 import com.google.gson.Gson;
-import com.sippbox.enums.Channels;
+import com.sippbox.enums.SABChannels;
 import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 
@@ -21,7 +21,7 @@ public class ChannelRegistry {
         }
     }
 
-    public static TextChannel getTextChannel(Guild guild, Channels channel) {
+    public static TextChannel getTextChannel(Guild guild, SABChannels channel) {
         String channelId = channelIds.get(channel.name().toLowerCase());
         if (channelId == null) {
             throw new IllegalArgumentException("Channel ID not found for " + channel.name());

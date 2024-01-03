@@ -5,12 +5,10 @@ import com.sippbox.bot.listeners.JoinListener;
 import com.sippbox.bot.listeners.MessageListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Guild;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import com.sippbox.bot.listeners.ReadyListener;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -31,7 +29,8 @@ public class JdaService {
     public JdaService(String token) {
         this.token = token;
 
-        gatewayIntents.add(GatewayIntent.MESSAGE_CONTENT);
+        gatewayIntents.add(GatewayIntent.MESSAGE_CONTENT); // Intent for receiving messages
+        gatewayIntents.add(GatewayIntent.GUILD_MEMBERS); // Intent for receiving guild member events
 
         start(gatewayIntents);
     }
@@ -45,7 +44,7 @@ public class JdaService {
         try {
             jda = JDABuilder.createDefault(token)
                     .enableIntents(gatewayIntents)
-                    .addEventListeners(new SlashCommandHandler(), new ReadyListener(), new MessageListener())
+                    .addEventListeners(new SlashCommandHandler(), new ReadyListener(), new MessageListener(), new JoinListener())
                     .build();
 
             jda.awaitReady();

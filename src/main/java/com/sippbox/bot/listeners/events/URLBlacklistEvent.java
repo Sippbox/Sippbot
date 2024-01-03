@@ -1,7 +1,7 @@
 package com.sippbox.bot.listeners.events;
 
 import com.sippbox.utils.ChannelRegistry;
-import com.sippbox.enums.Channels;
+import com.sippbox.enums.SABChannels;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -26,7 +26,7 @@ public class URLBlacklistEvent {
      * @param event The MessageReceivedEvent that triggered this event.
      */
     public URLBlacklistEvent(MessageReceivedEvent event) {
-        avatarHelperChat = ChannelRegistry.getTextChannel(event.getGuild(), Channels.AVATAR_HELPER_CHAT);
+        avatarHelperChat = ChannelRegistry.getTextChannel(event.getGuild(), SABChannels.AVATAR_HELPER_CHAT);
         String messageContent = event.getMessage().getContentRaw();
 
         // Check if the message contains any blacklisted URLs

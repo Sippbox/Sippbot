@@ -23,6 +23,8 @@ public class Sippbot {
      * @param args Command line arguments
      */
     public static void main(String[] args) {
+        // If channel_ids.json or role_ids.json do not exist, exit the program
+        instance.checkForJsonFiles();
         // Retrieve the bot token
         String token = getToken(args);
         // Initialize the JDA service with the bot token
@@ -59,6 +61,13 @@ public class Sippbot {
             token = args[0];
         }
         return token;
+    }
+
+    private void checkForJsonFiles() {
+        if (!Files.exists(Paths.get("channel_ids.json")) || !Files.exists(Paths.get("role_ids.json"))) {
+            System.out.println("channel_ids.json or role_ids.json does not exist!");
+            System.exit(0);
+        }
     }
 
 
