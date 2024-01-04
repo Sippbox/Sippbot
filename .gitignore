@@ -1,4 +1,4 @@
-# Created by https://www.toptal.com/developers/gitignore/api/java,intellij,maven,windows,linux,macos,git
+# Created by https://www.toptal.com/developers/gitignore/VRCApi/java,intellij,maven,windows,linux,macos,git
 # Edit at https://www.toptal.com/developers/gitignore?templates=java,intellij,maven,windows,linux,macos,git
 
 ### Git ###
@@ -254,4 +254,4 @@ bot_tokens_do_not_add_to_git
 channel_ids.json
 role_ids.json
 
-# End of https://www.toptal.com/developers/gitignore/api/java,intellij,maven,windows,linux,macos,git
+# End of https://www.toptal.com/developers/gitignore/VRCApi/java,intellij,maven,windows,linux,macos,git
