@@ -188,8 +188,8 @@ public final class MessageUtils {
     public static MessageEmbed createBanScammerConfirmationEmbed(Member member){
         EmbedBuilder embed = new EmbedBuilder();
         embed.setColor(Color.RED);
-        embed.setTitle("Ban Scammer");
-        embed.setDescription("Are you sure you want to ban " + member.getUser().getAsMention() + " for **scamming?**");
+        embed.setTitle("Scammer Banned");
+        embed.setDescription(member.getUser().getAsMention() + " has been banned for scamming!");
         //add fields for the users account age
         long accountCreationTimestamp = member.getUser().getTimeCreated().toInstant().getEpochSecond();
         embed.addField("Account Age", "<t:" + accountCreationTimestamp + ":f>", true);

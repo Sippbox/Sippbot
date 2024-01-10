@@ -4,6 +4,7 @@ import com.sippbox.bot.Sippbot;
 import com.sippbox.bot.commands.commands.*;
 import com.sippbox.bot.commands.commands.PingCommand;
 import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.interactions.commands.Command;
 import net.dv8tion.jda.api.interactions.commands.build.CommandData;
 import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.interactions.commands.build.SlashCommandData;
@@ -24,6 +25,7 @@ public class CommandRegistry {
     private void registerCommands() {
         jda.ifPresentOrElse(jda -> {
             jda.updateCommands().addCommands(
+                    // Slash Commands
                     create(new TutorialCommand()),
                     create(new DocumentationCommand()),
                     create(new BlenderExportCommand()),
@@ -34,6 +36,8 @@ public class CommandRegistry {
                     create(new ToolCommand()),
                     create(new MessageChannelCommand())
 
+                    // Context Menu Commands
+                    //Commands.message("Report Message")
             ).queue();
         }, () -> {
             throw new IllegalStateException("JDA is not present!");

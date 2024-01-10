@@ -2,88 +2,84 @@ package com.sippbox.bot.commands.commands;
 
 import com.sippbox.bot.commands.manager.SlashCommand;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
-import com.sippbox.bot.listeners.ConfirmScamBanListener;
-import com.sippbox.utils.MessageUtils;
+import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.MessageEmbed;
-import net.dv8tion.jda.api.entities.emoji.Emoji;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
-import net.dv8tion.jda.api.interactions.components.buttons.Button;
 
-/**
- * This class represents a command for banning a user for scamming.
- * It extends the SlashCommand class and overrides its methods to provide the functionality for the ban command.
- */
+import java.awt.*;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 public class ScamBanCommand extends SlashCommand {
 
-    /**
-     * Returns the name of the command.
-     * @return the name of the command.
-     */
     @Override
-    public String name() {
-        return "scam";
-    }
+    public String name() { return "scam"; }
 
-    /**
-     * Returns the description of the command.
-     * @return the description of the command.
-     */
     @Override
-    public String description() {
-        return "Bans a user for scamming, confirms with a button, sends appeal info to banned user.";
-    }
+    public String description() { return "Bans a user for scamming, confirms with a button, sends appeal info to banned user."; }
 
-    /**
-     * Returns the permissions needed to execute the command.
-     * @return an array of Permission objects representing the needed permissions.
-     */
     @Override
-    public Permission[] neededPermissions() {
-        return new Permission[]{Permission.USE_APPLICATION_COMMANDS, Permission.BAN_MEMBERS};
-    }
+    public Permission[] neededPermissions() { return new Permission[]{Permission.USE_APPLICATION_COMMANDS, Permission.BAN_MEMBERS}; }
 
-    /**
-     * Returns whether the command can only be executed in a guild.
-     * @return false, indicating that the command can be executed in any context.
-     */
     @Override
-    public boolean guildOnly() {
-        return false;
-    }
+    public boolean guildOnly() { return false; }
 
-    /**
-     * Returns the options for the command.
-     * @return an array of OptionData objects representing the command options.
-     */
     @Override
     public OptionData[] options() {
-        return new OptionData[]{
-                //Option data for the user ID of the user to ban
-                new OptionData(OptionType.STRING, "userid", "The ID of the user to ban", true),
-        };
+        return new OptionData[]{ new OptionData(OptionType.STRING, "userid", "The ID of the user to ban", true) };
     }
 
-    /**
-     * Executes the command.
-     * This method is called when the command is executed. It retrieves the user ID from the command options,
-     * retrieves the member associated with the user ID, creates a message embed and a "Ban user" button,
-     * sends the embed and the button as a reply to the command, and adds a listener to handle the button click event.
-     * @param info a SlashCommandRecord object containing information about the command execution.
-     */
     @Override
     public void execute(SlashCommandRecord info) {
-        String userId = info.options().get(0).getAsString();
+        info.event().deferReply().queue();
+        Member member = info.event().getGuild().retrieveMemberById(info.options().get(0).getAsString()).complete();
 
-        info.event().getGuild().retrieveMemberById(userId).queue(member -> {
-            MessageEmbed embed = MessageUtils.createBanScammerConfirmationEmbed(member);
-            Button banButton = Button.danger("ban_user", "Ban user").withEmoji(Emoji.fromUnicode("⚠"));
-            info.event().replyEmbeds(embed).addActionRow(banButton).queue();
+        if (member == null) {
+            info.event().getHook().editOriginal("User not found!").queue();
+            return;
+        }
 
-            info.event().getJDA().addEventListener(new ConfirmScamBanListener(member));
+        AtomicBoolean messageSent = new AtomicBoolean(false);
+        member.getUser().openPrivateChannel().queue(channel -> {
+            channel.sendMessageEmbeds(createUserEmbed()).queue(success -> {
+                messageSent.set(true);
+                sendModEmbed(info, member, messageSent.get());
+            }, failure -> {
+                messageSent.set(false);
+                sendModEmbed(info, member, messageSent.get());
+            });
+        });
 
+        info.event().getGuild().ban(member, 7, TimeUnit.DAYS).queue();
+    }
 
-        }, failure -> info.event().reply("Failed to find user. Are you sure they're in the server?").setEphemeral(true).queue());
+    private void sendModEmbed(SlashCommandRecord info, Member member, boolean messageSent) {
+        info.event().getHook().editOriginalEmbeds(createModEmbed(member, messageSent)).queue();
+    }
+
+    private MessageEmbed createUserEmbed() {
+        return new EmbedBuilder()
+                .setTitle("Ban Notification")
+                .setDescription("You have been banned from Sipp's Avatar Box because malicious/scamming activity was detected from your account. If you are not a scammer and we made a mistake, please fill out the appeal form below. If you *are* a scammer, please stop wasting our time and yours. **You know who you are.**")
+                .addField("Appeal Form", "https://dyno.gg/form/e887a05c", false)
+                .setThumbnail("https://cdn.discordapp.com/icons/873806377183752212/a_16f71e81793a68f20ebce0ad5145b11b.gif?size=128")
+                .setColor(Color.RED)
+                .build();
+    }
+
+    private MessageEmbed createModEmbed(Member member, boolean messageSent) {
+        return new EmbedBuilder()
+                .setColor(Color.RED)
+                .setTitle("Scammer Banned")
+                .setDescription(member.getUser().getAsMention() + " has been banned for scamming!")
+                .addField("Account Age", "<t:" + member.getUser().getTimeCreated().toInstant().getEpochSecond() + ":f>", true)
+                .addField("Joined Server", "<t:" + member.getTimeJoined().toInstant().getEpochSecond() + ":f>", false)
+                .addField("Appeal Message Sent", messageSent ? "True" : "False", false)
+                .setThumbnail(member.getUser().getAvatarUrl())
+                .setFooter("User ID: " + member.getUser().getId())
+                .build();
     }
 }

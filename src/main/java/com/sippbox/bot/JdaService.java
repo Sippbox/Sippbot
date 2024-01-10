@@ -1,5 +1,6 @@
 package com.sippbox.bot;
 
+import com.sippbox.bot.commands.commands.ReportMessageCommand;
 import com.sippbox.utils.VRCApi;
 import com.sippbox.bot.commands.manager.SlashCommandHandler;
 import com.sippbox.bot.listeners.JoinListener;
@@ -47,6 +48,8 @@ public class JdaService {
                     .enableIntents(gatewayIntents)
                     .addEventListeners(new SlashCommandHandler(), new ReadyListener(), new MessageListener(), new JoinListener())
                     .build();
+
+            jda.addEventListener(new ReportMessageCommand());
 
             // Set the bot's activity
             vrcPlayerCountActivity();
