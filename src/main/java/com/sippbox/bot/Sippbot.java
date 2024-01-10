@@ -78,28 +78,6 @@ public class Sippbot {
         }
     }
 
-//    private TimerTask fetchVRChatPlayerCount() {
-//        return new TimerTask() {
-//            @Override
-//            public void run() {
-//                AtomicInteger playerCount = new AtomicInteger();
-//
-//                HttpClient.newHttpClient().sendAsync(HttpRequest.newBuilder()
-//                                .uri(URI.create("https://api.vrchat.cloud/api/1/visits"))
-//                                .GET()
-//                                .build(), HttpResponse.BodyHandlers.ofString())
-//                        .thenApply(HttpResponse::body)
-//                        .thenAccept(playerCountString -> {
-//                            playerCount.set(Integer.parseInt(playerCountString));
-//                        })
-//                        .join();
-//
-//                getJdaService().setActivity("VRChat with " + playerCount.get() + " players");
-//            }
-//        };
-//    }
-
-
     /**
      * Returns the singleton instance of the Sippbot class.
      * @return The singleton instance

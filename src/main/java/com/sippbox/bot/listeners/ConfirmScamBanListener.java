@@ -11,27 +11,14 @@ import java.awt.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
-/**
- * This class extends ListenerAdapter from JDA (Java Discord API) and overrides the onButtonInteraction method.
- * It listens for the ban button being clicked and triggers a ban on the user.
- */
 public class ConfirmScamBanListener extends ListenerAdapter {
 
     private final Member MEMBER;
 
-    /**
-     * Constructor for the ConfirmScamBanListener class.
-     * @param member The member to be banned.
-     */
     public ConfirmScamBanListener(Member member) {
         this.MEMBER = member;
     }
 
-    /**
-     * This method is triggered whenever a button interaction is received.
-     * It checks if the interaction is related to banning a user and if so, it defers the reply, sends a ban message to the user, and bans the user.
-     * @param event The event of a button interaction.
-     */
     @Override
     public void onButtonInteraction(ButtonInteractionEvent event) {
         if (event.getComponentId().equals("ban_user") && !event.isAcknowledged()) {
@@ -45,11 +32,6 @@ public class ConfirmScamBanListener extends ListenerAdapter {
         }
     }
 
-    /**
-     * This method sends a ban message to the user.
-     * It opens a private channel with the user and sends an embed message notifying them of the ban.
-     * @return A CompletableFuture that completes with a boolean indicating whether the message was sent successfully.
-     */
     private CompletableFuture<Boolean> sendBanMessage() {
         CompletableFuture<Boolean> future = new CompletableFuture<>();
         MEMBER.getUser().openPrivateChannel().queue(channel -> {
@@ -60,21 +42,11 @@ public class ConfirmScamBanListener extends ListenerAdapter {
                     .setThumbnail("https://cdn.discordapp.com/icons/873806377183752212/a_16f71e81793a68f20ebce0ad5145b11b.gif?size=128")
                     .setColor(Color.RED);
 
-            try {
-                channel.sendMessageEmbeds(embed.build()).queue(success -> future.complete(true), failure -> future.complete(false));
-            } catch (Exception e) {
-                System.out.println("Failed to send ban message to user: " + e.getMessage());
-                future.complete(false);
-            }
+            channel.sendMessageEmbeds(embed.build()).queue(success -> future.complete(true), failure -> future.complete(false));
         });
         return future;
     }
 
-    /**
-     * This method bans the user from the guild.
-     * It also edits the original message to reflect the ban status.
-     * @param event The event of a button interaction.
-     */
     private void banUser(ButtonInteractionEvent event) {
         event.getGuild().ban(MEMBER, 7, TimeUnit.DAYS).reason("[Sippbot] Scamming").queue(success -> {
             Button confirmedBanButton = Button.success("ban_success", "Banned").asDisabled();
@@ -83,5 +55,4 @@ public class ConfirmScamBanListener extends ListenerAdapter {
             event.reply("Failed to ban user. Are you sure they are in the server?").queue();
         });
     }
-
 }
