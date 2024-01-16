@@ -37,12 +37,6 @@
     </repositories>
     <dependencies>
         <dependency>
-            <groupId>com.github.vrchatapi</groupId>
-            <artifactId>vrchatapi-java</artifactId>
-            <version>main-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>net.dv8tion</groupId>
             <artifactId>JDA</artifactId>
             <version>5.0.0-beta.13</version>
@@ -70,11 +64,6 @@
             <version>3.12.0</version>
         </dependency>
         <!--  https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-async  -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-VRCApi</artifactId>
-            <version>LATEST</version>
-        </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-simple</artifactId>
