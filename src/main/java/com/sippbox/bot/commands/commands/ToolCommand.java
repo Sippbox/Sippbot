@@ -64,6 +64,8 @@ public class ToolCommand extends SlashCommand {
                     "https://github.com/poiyomi/PoiyomiToonShader", ToolCategory.SHADERS));
             add(new Tool("lilToon", "Feature-rich shaders commonly used for Booth models.",
                     "https://github.com/lilxyzw/lilToon", ToolCategory.SHADERS));
+            add(new Tool("CATS Blender Plugin", "A suite of blender tools useful for editing and optimizing VRChat avatars. ",
+                    "https://github.com/absolute-quantum/cats-blender-plugin/archive/refs/heads/development.zip", ToolCategory.PRODUCTIVITY));
         }
     };
 
