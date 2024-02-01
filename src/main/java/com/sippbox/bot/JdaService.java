@@ -51,26 +51,11 @@ public class JdaService {
 
             jda.addEventListener(new ReportMessageCommand());
 
-            // Set the bot's activity
-            vrcPlayerCountActivity();
-
             jda.awaitReady();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-    }
-    private void vrcPlayerCountActivity(){
-        VRCApi VRCApi = new VRCApi();
-        Timer timer = new Timer();
-        int refreshRate = 30000;
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                int playerCount = VRCApi.getPlayerCount();
-                jda.getPresence().setActivity(Activity.playing("VRChat (" + playerCount + " Players)"));
-            }
-        }, 0, refreshRate);
     }
 
 
