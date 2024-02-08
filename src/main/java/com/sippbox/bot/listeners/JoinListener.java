@@ -24,7 +24,7 @@ public class JoinListener extends ListenerAdapter {
         var embed = new EmbedBuilder()
                 .setTitle("New Member: " + event.getUser().getName())
                 .setDescription(event.getUser().getAsMention() + " (" + event.getUser().getId() + ")")
-                .setThumbnail(event.getUser().getAvatarUrl())
+                .setThumbnail(event.getUser().getEffectiveAvatarUrl())
                 .addField("Account Created", "<t:" + event.getMember().getTimeCreated().toInstant().getEpochSecond() + ":f>", false)
                 .addField("Joined Server", "<t:" + event.getMember().getTimeJoined().toInstant().getEpochSecond() + ":f>", false)
                 .setColor(Color.BLACK)
