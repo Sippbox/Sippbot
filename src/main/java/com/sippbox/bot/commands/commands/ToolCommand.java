@@ -1,7 +1,7 @@
 package com.sippbox.bot.commands.commands;
 
 import com.sippbox.enums.ToolCategory;
-import com.sippbox.beans.Tool;
+import com.sippbox.pojo.Tool;
 import com.sippbox.bot.commands.manager.SlashCommand;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
 import net.dv8tion.jda.api.EmbedBuilder;

@@ -29,7 +29,7 @@ public class JoinListener extends ListenerAdapter {
                 .addField("Joined Server", "<t:" + event.getMember().getTimeJoined().toInstant().getEpochSecond() + ":f>", false)
                 .setColor(Color.BLACK)
                 .build();
-        channel.sendMessageEmbeds(embed).queue();
+        channel.sendMessage(event.getUser().getAsMention() + " has joined the server!").addEmbeds(embed).queue();
     }
 
     private void assignMemberRole(GuildMemberJoinEvent event) {

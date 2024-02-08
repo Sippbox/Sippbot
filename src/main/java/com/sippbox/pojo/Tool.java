@@ -1,4 +1,4 @@
-package com.sippbox.beans;
+package com.sippbox.pojo;
 
 import com.sippbox.enums.ToolCategory;
 

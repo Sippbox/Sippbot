@@ -1,13 +1,11 @@
 package com.sippbox.bot;
 
 import com.sippbox.bot.commands.commands.ReportMessageCommand;
-import com.sippbox.utils.VRCApi;
 import com.sippbox.bot.commands.manager.SlashCommandHandler;
 import com.sippbox.bot.listeners.JoinListener;
 import com.sippbox.bot.listeners.MessageListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
-import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.requests.GatewayIntent;
 import com.sippbox.bot.listeners.ReadyListener;
 
