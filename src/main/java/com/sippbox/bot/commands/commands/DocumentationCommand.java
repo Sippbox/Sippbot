@@ -24,7 +24,7 @@ public class DocumentationCommand extends SlashCommand {
 
     @Override
     public boolean guildOnly() {
-        return true;
+        return false;
     }
 
     @Override

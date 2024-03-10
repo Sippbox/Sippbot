@@ -9,8 +9,12 @@ import com.sippbox.bot.commands.manager.SlashCommand;
 
 import java.util.List;
 
-public record SlashCommandRecord(SlashCommand slashCommand, SlashCommandInteractionEvent event, Member sender, MessageChannel messageChannel, List<OptionMapping> options) {
-
-}
+public record SlashCommandRecord(
+        SlashCommand slashCommand,
+        SlashCommandInteractionEvent event,
+        Member sender,
+        MessageChannel messageChannel,
+        List<OptionMapping> options
+){}
 
 

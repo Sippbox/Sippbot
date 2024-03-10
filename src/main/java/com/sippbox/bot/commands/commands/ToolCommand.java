@@ -102,7 +102,7 @@ public class ToolCommand extends SlashCommand {
      */
     @Override
     public boolean guildOnly() {
-        return true;
+        return false;
     }
 
     /**

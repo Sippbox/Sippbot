@@ -71,7 +71,7 @@ public class TutorialCommand extends SlashCommand {
      */
     @Override
     public boolean guildOnly() {
-        return true;
+        return false;
     }
 
     /**
