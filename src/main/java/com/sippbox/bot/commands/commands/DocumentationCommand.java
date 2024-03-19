@@ -6,6 +6,9 @@ import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.interactions.commands.OptionType;
 import net.dv8tion.jda.api.interactions.commands.build.OptionData;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class DocumentationCommand extends SlashCommand {
     @Override
     public String name() {
@@ -37,7 +40,8 @@ public class DocumentationCommand extends SlashCommand {
                         .addChoice("Performance Ranking", "perfranks")
                         .addChoice("Avatar Optimization", "optimization")
                         .addChoice("PhysBones", "physbones")
-                        .addChoice("Contacts", "contacts")
+                        .addChoice("Contacts", "contacts"),
+                new OptionData(OptionType.STRING, "hash-link", "Link to a specific section of the documentation, e.g., 'maximum-bounds' for 'Physbones'. ", false)
         };
     }
 
@@ -48,31 +52,30 @@ public class DocumentationCommand extends SlashCommand {
 
         String documentation = info.options().get(0).getAsString();
 
-        switch (documentation) {
-            case "animatorlayers":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/playable-layers").queue();
-                break;
-            case "animatorparameters":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/animator-parameters").queue();
-                break;
-            case "statebehaviors":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/state-behaviors").queue();
-                break;
-            case "perfranks":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/avatar-performance-ranking-system").queue();
-                break;
-            case "optimization":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/avatar-optimizing-tips").queue();
-                break;
-            case "physbones":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/avatar-dynamics/physbones").queue();
-                break;
-            case "contacts":
-                info.event().getHook().editOriginal("https://creators.vrchat.com/avatars/avatar-dynamics/contacts").queue();
-                break;
-            default:
-                info.event().getHook().editOriginal("Invalid documentation!").queue();
-                break;
+        // Map documentation to URL
+        Map<String, String> docToUrlMap = new HashMap<>();
+        docToUrlMap.put("animatorlayers", "https://creators.vrchat.com/avatars/playable-layers");
+        docToUrlMap.put("animatorparameters", "https://creators.vrchat.com/avatars/animator-parameters");
+        docToUrlMap.put("statebehaviors", "https://creators.vrchat.com/avatars/state-behaviors");
+        docToUrlMap.put("perfranks", "https://creators.vrchat.com/avatars/avatar-performance-ranking-system");
+        docToUrlMap.put("optimization", "https://creators.vrchat.com/avatars/avatar-optimizing-tips");
+        docToUrlMap.put("physbones", "https://creators.vrchat.com/avatars/avatar-dynamics/physbones");
+        docToUrlMap.put("contacts", "https://creators.vrchat.com/avatars/avatar-dynamics/contacts");
+
+        // Get the URL
+        String url = docToUrlMap.getOrDefault(documentation, "Invalid documentation!");
+
+        // Add hash link if provided
+        if (info.options().size() > 1) {
+            String hashLink = info.options().get(1).getAsString();
+
+            //check if the hash link provided contains #, if not, add it
+            if (!hashLink.startsWith("#")) {
+                hashLink = "#" + hashLink;
+            }
+            url += hashLink;
         }
+
+        info.event().getHook().editOriginal(url).queue();
     }
 }
