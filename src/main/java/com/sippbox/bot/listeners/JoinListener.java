@@ -4,7 +4,9 @@ import com.sippbox.enums.SABChannels;
 import com.sippbox.enums.SABRoles;
 import com.sippbox.utils.ChannelRegistry;
 import com.sippbox.utils.RoleRegistry;
+import com.sippbox.utils.SLog;
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
 import net.dv8tion.jda.api.entities.Role;
 import net.dv8tion.jda.api.events.guild.member.GuildMemberJoinEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
@@ -33,7 +35,17 @@ public class JoinListener extends ListenerAdapter {
     }
 
     private void assignMemberRole(GuildMemberJoinEvent event) {
-        Role memberRole = RoleRegistry.getRole(event.getGuild(), SABRoles.MEMBER);
-        event.getGuild().addRoleToMember(event.getMember(), memberRole).queue();
+        Role memberRole = event.getGuild().getRoleById(SABRoles.MEMBER.getId());
+        Member member = event.getMember();
+
+
+        if (memberRole == null) {
+            SLog.logRoleApplicationResult(false, member);
+            return;
+        }
+
+        event.getGuild().addRoleToMember(member, memberRole).queue();
+
+        SLog.logRoleApplicationResult(true, member);
     }
 }

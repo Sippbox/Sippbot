@@ -1,6 +1,8 @@
 package com.sippbox.bot;
 
 import com.sippbox.bot.commands.manager.CommandRegistry;
+import net.dv8tion.jda.api.JDA;
+import net.dv8tion.jda.api.entities.Guild;
 
 import java.io.*;
 import java.net.URI;
@@ -9,6 +11,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Optional;
 import java.util.Scanner;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -100,5 +103,21 @@ public class Sippbot {
      */
     public CommandRegistry getCommandRegistry() {
         return commandRegistry;
+    }
+
+    /**
+     * Retrieves the Guild object associated with the bot's guild ID.
+     *
+     * @return The Guild object if it exists, null otherwise.
+     */
+    public Guild getGuild() {
+        Optional<JDA> optionalJda = jdaService.getJda();
+        if (optionalJda.isPresent()) {
+            JDA jda = optionalJda.get();
+            String guildId = "873806377183752212";
+            return jda.getGuildById(guildId);
+        } else {
+            return null;
+        }
     }
 }
