@@ -34,6 +34,7 @@ public class TutorialCommand extends SlashCommand {
                     .addChoice("Quest Optimization", "8MkgXcidxg4")
                     .addChoice("Voice Activated Effects", "kgs5gz8BPtY")
                     .addChoice("Unity 2022 Upgrade", "M9l0SVF0fJY")
+                    .addChoice("Sound Effects", "BmXCXP6UsQ8")
     };
     // Regex pattern for youtube video IDs
     private static final String YOUTUBE_REGEX = "^[a-zA-Z0-9_-]{11}$";
