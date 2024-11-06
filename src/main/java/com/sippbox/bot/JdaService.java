@@ -44,7 +44,10 @@ public class JdaService {
         try {
             jda = JDABuilder.createDefault(token)
                     .enableIntents(gatewayIntents)
-                    .addEventListeners(new SlashCommandHandler(), new ReadyListener(), new MessageListener(), new JoinListener())
+                    .addEventListeners(new SlashCommandHandler(),
+                            new ReadyListener(),
+                            new MessageListener(),
+                            new JoinListener())
                     .build();
 
             jda.addEventListener(new ReportMessageCommand());

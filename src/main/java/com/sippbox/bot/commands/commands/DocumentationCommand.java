@@ -40,7 +40,16 @@ public class DocumentationCommand extends SlashCommand {
                         .addChoice("Performance Ranking", "perfranks")
                         .addChoice("Avatar Optimization", "optimization")
                         .addChoice("PhysBones", "physbones")
-                        .addChoice("Contacts", "contacts"),
+                        .addChoice("Contacts", "contacts")
+                        .addChoice("Whitelisted Avatar Components", "whitelistedcomponents")
+                        .addChoice("Shader Fallback System", "shaderfallback")
+                        .addChoice("Rig Requirements", "rigrequirements")
+                        .addChoice("Expression Menu and Controls", "expressionmenu")
+                        .addChoice("Avatar Size Limits", "avatarsizelimits")
+                        .addChoice("Avatar Scaling", "avatarscaling")
+                        .addChoice("Avatar Impostors", "avatarimpostors")
+                        .addChoice("VRC Headchop", "vrcheadchop")
+                        .addChoice("Constraints", "constraints"),
                 new OptionData(OptionType.STRING, "hash-link", "Link to a specific section of the documentation, e.g., 'maximum-bounds' for 'Physbones'. ", false)
         };
     }
@@ -61,6 +70,15 @@ public class DocumentationCommand extends SlashCommand {
         docToUrlMap.put("optimization", "https://creators.vrchat.com/avatars/avatar-optimizing-tips");
         docToUrlMap.put("physbones", "https://creators.vrchat.com/avatars/avatar-dynamics/physbones");
         docToUrlMap.put("contacts", "https://creators.vrchat.com/avatars/avatar-dynamics/contacts");
+        docToUrlMap.put("whitelistedcomponents", "https://creators.vrchat.com/avatars/whitelisted-avatar-components/whitelisted-avatar-components");
+        docToUrlMap.put("shaderfallback", "https://creators.vrchat.com/avatars/shader-fallback-system");
+        docToUrlMap.put("rigrequirements", "https://creators.vrchat.com/avatars/rig-requirements");
+        docToUrlMap.put("expressionmenu", "https://creators.vrchat.com/avatars/expression-menu-and-controls");
+        docToUrlMap.put("avatarsizelimits", "https://creators.vrchat.com/avatars/avatar-size-limits");
+        docToUrlMap.put("avatarscaling", "https://creators.vrchat.com/avatars/avatar-scaling");
+        docToUrlMap.put("avatarimpostors", "https://creators.vrchat.com/avatars/avatar-impostors");
+        docToUrlMap.put("vrcheadchop", "https://creators.vrchat.com/avatars/avatar-dynamics/vrc-headchop");
+        docToUrlMap.put("constraints", "https://creators.vrchat.com/avatars/avatar-dynamics/constraints");
 
         // Get the URL
         String url = docToUrlMap.getOrDefault(documentation, "Invalid documentation!");
