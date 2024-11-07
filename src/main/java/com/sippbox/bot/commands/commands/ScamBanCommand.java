@@ -2,6 +2,7 @@ package com.sippbox.bot.commands.commands;
 
 import com.sippbox.bot.commands.manager.SlashCommand;
 import com.sippbox.bot.commands.status.SlashCommandRecord;
+import com.sippbox.enums.SABRoles;
 import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Member;
@@ -23,7 +24,7 @@ public class ScamBanCommand extends SlashCommand {
     public String description() { return "Bans a user for scamming, sends appeal info to banned user."; }
 
     @Override
-    public Permission[] neededPermissions() { return new Permission[]{Permission.USE_APPLICATION_COMMANDS, Permission.BAN_MEMBERS}; }
+    public Permission[] neededPermissions() { return new Permission[]{Permission.USE_APPLICATION_COMMANDS, Permission.BAN_MEMBERS, Permission.MESSAGE_MANAGE}; }
 
     @Override
     public boolean guildOnly() { return false; }
@@ -38,6 +39,7 @@ public class ScamBanCommand extends SlashCommand {
     @Override
     public void execute(SlashCommandRecord info) {
         info.event().deferReply().queue();
+
         Member member = info.event().getGuild().retrieveMemberById(info.options().get(0).getAsString()).complete();
 
         // If the member is not found, send a message and return
